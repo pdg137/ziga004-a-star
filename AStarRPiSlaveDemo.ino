@@ -28,7 +28,7 @@ struct Data
 {
   bool yellow, green, red;
   bool buttonA, buttonB, buttonC;
-  bool servo;
+  bool left, right;
 
   int16_t leftMotor, rightMotor;
   uint16_t batteryMillivolts;
@@ -46,7 +46,6 @@ AStar32U4ButtonB buttonB;
 AStar32U4ButtonC buttonC;
 Servo servo;
 int pos = 0;
-int s = 10;
 
 
 void setup()
@@ -94,20 +93,14 @@ void loop()
     slave.buffer.playNotes = false;
   }
 
-  if(slave.buffer.servo)
+  if(slave.buffer.left == HIGH && pos < 180)
   {
-    delay(100);
-    for (pos = 0; pos <= 180; pos += 1) { // goes from 0 degrees to 180 degrees // in steps of 1 degree
-    servo.write(pos);              // tell servo to go to position in variable 'pos'
-    delay(s);                       // waits 15ms for the servo to reach the position
-    }
-    for (pos = 180; pos >= 0; pos -= 1) { // goes from 180 degrees to 0 degrees
-    servo.write(pos);              // tell servo to go to position in variable 'pos'
-    delay(s);                       // waits 15ms for the servo to reach the position
-    }
+    servo.write(pos++);
+    delay(10);
   }
-  else {
-    servo.write(0);
+  else if(slave.buffer.right == HIGH && pos > 3)
+    servo.write(pos--);
+    delay(5);
     }
 
 

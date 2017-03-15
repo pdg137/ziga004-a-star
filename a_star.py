@@ -37,22 +37,22 @@ self.bus.write_i2c_block_data(20, address, data_array)
     self.write_pack(0, 'BBB', red, yellow, green)
 
   def play_notes(self, notes):
-    self.write_pack(25, 'B15s', 1, notes.encode("ascii"))
+    self.write_pack(26, 'B15s', 1, notes.encode("ascii"))
 
   def motors(self, left, right):
-    self.write_pack(7, 'hh', left, right)
+    self.write_pack(8, 'hh', left, right)
 
   def read_buttons(self):
     return self.read_unpack(3, 3, "???")
 
   def read_battery_millivolts(self):
-    return self.read_unpack(11, 2, "H")
+    return self.read_unpack(12, 2, "H")
 
   def read_analog(self):
-    return self.read_unpack(13, 12, "HHHHHH")
+    return self.read_unpack(14, 12, "HHHHHH")
 
-  def servo_motor(self, servo):
-    return self.write_pack(6, 'B', servo)
+  def servo_motor(self, left, right):
+    return self.write_pack(6, 'BB', left, right)
 
   def test_read8(self):
     self.read_unpack(0, 8, 'cccccccc')

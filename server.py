@@ -16,8 +16,8 @@ import json
 led0_state = False
 led1_state = False
 led2_state = False
-servo_state = False
-
+left_state = False
+right_state = False
 
 limiter = 0.5
 
@@ -77,11 +77,13 @@ def shutting_down():
     return "Shutting down in 2 seconds! You can remove power when the green LED stops flashing."
 
 #####################################################################
-@app.route("/servo/<int:servo>")
-def servo_motor(servo):
-    a_star.servo_motor(servo)
-    global servo_state
-    servo_state = servo
+@app.route("/servo/<int:left>,<int:right>")
+def servo_motor(left, right):
+    a_star.servo_motor(left, right)
+    global left_state
+    global right_state
+    left_state = left
+    right_state = right
     return ""
 ####################################################################
 

@@ -132,7 +132,10 @@ function shutdown() {
   return false
 }
 
+///////////////////////////////////////////////////
 function servoMotor() {
-  servo = $('#servo')[0].checked ? 1 : 0
-  $.ajax({url: "servo/"+servo})
+  left = $('#left')[0].checked ? 1 : 0
+  right = $('#right')[0].checked ? 1 : 0
+  $.ajax({url: "servo/"+left+","+right})
 }
+///////////////////////////////////////////////////
